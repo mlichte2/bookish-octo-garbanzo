@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeMirror</title>
+    <script src="dependencies/codemirror-5.65.3/lib/codemirror.js"></script>
+    <link
+      rel="stylesheet"
+      href="dependencies/codemirror-5.65.3/lib/codemirror.css"
+    />
+
+    <script src="dependencies/codemirror-5.65.3/mode/javascript/javascript.js"></script>
+    <script src="dependencies/codemirror-5.65.3/addon/edit/closebrackets.js"></script>
+    <script src="dependencies/codemirror-5.65.3/addon/edit/matchbrackets.js"></script>
+    <script src="dependencies/codemirror-5.65.3/addon/fold/foldcode.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://sdk.primer.io/web/v2.0.0/Checkout.css"
+    />
+    <script
+      src="https://sdk.primer.io/web/v2.0.0/Primer.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="editor-div">
+      <h1>Primer Playground</h1>
+      <div><textarea id="editor"></textarea></div>
+      <div><button id="submit-button">Build Primer</button></div>
+      <div id="checkout-container"></div>
+    </div>
+  </body>
+  <script src="index.js"></script>
+</html>
