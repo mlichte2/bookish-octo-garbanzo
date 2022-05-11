@@ -4,11 +4,7 @@
   align-items: center;
 }
 
-#editor {
-  margin: 20px;
-}
-
 button {
-  width: 80px;
+  width: 100px;
   margin: 10px;
 }

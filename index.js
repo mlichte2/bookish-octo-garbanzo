@@ -1,7 +1,13 @@
 const defaultValue = `requestParams = {
   // see full list of possible params below
   // https://apiref.primer.io/reference/create_client_side_token_client_session_post
+
+
+  // Create an orderId for this client session
+  // Make sure to keep track of it: you will later receive updates through Webhooks.
   orderId: "order-" + Math.random(),
+
+  // 3-character Currency Code used for all the amount of this session
   currencyCode: "EUR",
   customer: {
     emailAddress: "john@primer.io",
@@ -17,11 +23,14 @@ const defaultValue = `requestParams = {
     },
   },
   order: {
+    // Line items for this session
+    // If your checkout does not have line items:
+    //  > Pass a single line item with the total amount!
     lineItems: [
       {
         itemId: "shoes-123",
         description: "Some nice shoes!",
-        amount: 2222,
+        amount: 2222, // Amount should be in minor units!
         quantity: 1,
       },
     ],
@@ -30,13 +39,12 @@ const defaultValue = `requestParams = {
 
 const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   mode: "javascript",
-  //   theme: "nord",
   lineNumbers: true,
   autoCloseBrackets: true,
   matchBrackets: true,
   foldCode: true,
 });
-editor.setSize("80%", "600px");
+editor.setSize("90%", "600px");
 
 editor.setValue(defaultValue);
 
