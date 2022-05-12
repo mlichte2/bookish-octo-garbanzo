@@ -2,13 +2,15 @@ const defaultValue = `requestParams = {
   // see full list of possible params below
   // https://apiref.primer.io/reference/create_client_side_token_client_session_post
 
-
-  // Create an orderId for this client session
-  // Make sure to keep track of it: you will later receive updates through Webhooks.
   orderId: "order-" + Math.random(),
 
   // 3-character Currency Code used for all the amount of this session
   currencyCode: "EUR",
+
+  // amount = 2222, // if not using line items pass an amount 
+
+  // customer information
+  
   customer: {
     emailAddress: "john@primer.io",
     billingAddress: {
@@ -23,9 +25,11 @@ const defaultValue = `requestParams = {
     },
   },
   order: {
+
     // Line items for this session
     // If your checkout does not have line items:
     //  > Pass a single line item with the total amount!
+    
     lineItems: [
       {
         itemId: "shoes-123",
@@ -36,6 +40,8 @@ const defaultValue = `requestParams = {
     ],
   },
 }`;
+
+let built = false;
 
 const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   mode: "javascript",
@@ -57,9 +63,13 @@ const convertStringToObject = (str) => {
 
 submitButton.addEventListener("click", async function (e) {
   e.preventDefault();
+  if (built) {
+    const checkoutContainer = document.getElementById("checkout-container");
+    checkoutContainer.innerHTML = "";
+    // built = !built;
+  }
   const stringFromEditor = editor.getValue();
   const obj = convertStringToObject(stringFromEditor);
-  console.log(obj, typeof obj);
   const response = await fetch("/client-session", {
     method: "POST",
     headers: {
@@ -72,7 +82,7 @@ submitButton.addEventListener("click", async function (e) {
 });
 
 const buildPrimer = async (clientSession) => {
-  console.log(clientSession);
+  console.log("Client Session:", clientSession);
 
   const { clientToken } = clientSession;
 
@@ -91,4 +101,5 @@ const buildPrimer = async (clientSession) => {
       return handler.showErrorMessage(error);
     },
   });
+  built = true;
 };
