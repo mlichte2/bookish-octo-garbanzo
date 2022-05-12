@@ -1,7 +1,6 @@
 const defaultValue = `requestParams = {
   // see full list of possible params below
   // https://apiref.primer.io/reference/create_client_side_token_client_session_post
-
   orderId: "order-" + Math.random(),
 
   // 3-character Currency Code used for all the amount of this session
@@ -10,7 +9,6 @@ const defaultValue = `requestParams = {
   // amount = 2222, // if not using line items pass an amount 
 
   // customer information
-  
   customer: {
     emailAddress: "john@primer.io",
     billingAddress: {
@@ -25,11 +23,12 @@ const defaultValue = `requestParams = {
     },
   },
   order: {
+    // country code -- useful for displaying different payment methods
+    countryCode: "US",
 
     // Line items for this session
     // If your checkout does not have line items:
     //  > Pass a single line item with the total amount!
-    
     lineItems: [
       {
         itemId: "shoes-123",
