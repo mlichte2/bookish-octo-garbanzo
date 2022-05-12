@@ -23,13 +23,9 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-const PRIMER_API_URLS = {
-  SANDBOX: "https://api.sandbox.primer.io",
-  PRODUCTION: "https://api.primer.io",
-};
+const PRIMER_API_URL = "https://api.sandbox.primer.io";
 
 const API_KEY = process.env.API_KEY;
-const PRIMER_API_URL = PRIMER_API_URLS[process.env.PRIMER_API_ENVIRONMENT];
 
 app.post("/client-session", async (req, res) => {
   const url = `${PRIMER_API_URL}/client-session`;
