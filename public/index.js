@@ -6,7 +6,7 @@ const defaultValue = `requestParams = {
   // 3-character Currency Code used for all the amount of this session
   currencyCode: "EUR",
 
-  // amount = 2222, // if not using line items pass an amount 
+  // amount: 2222, // if not using line items pass an amount 
 
   // customer information
   customer: {
@@ -14,11 +14,11 @@ const defaultValue = `requestParams = {
     billingAddress: {
       firstName: "John",
       lastName: "Doe",
-      addressLine1: "123 Main St",
-      addressLine2: "Apt #1",
-      city: "San Francisco",
-      state: "CA",
-      postalCode: "94107",
+      addressLine1: "2222 W Dickens Ave",
+      addressLine2: "Unit 2",
+      city: "Chicago",
+      state: "IL",
+      postalCode: "60647",
       countryCode: "US",
     },
   },
