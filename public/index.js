@@ -4,7 +4,7 @@ const defaultValue = `requestParams = {
   orderId: "order-" + Math.random(),
 
   // 3-character Currency Code used for all the amount of this session
-  currencyCode: "EUR",
+  currencyCode: "USD",
 
   // amount: 2222, // if not using line items pass an amount 
 
