@@ -4,11 +4,44 @@
   align-items: center;
 }
 
-button {
-  width: 180px;
-  margin: 30px;
+select,
+.myButton {
+  background-color: #282a36;
+  color: #f8f8f2;
+  border: 1px solid #eaab67;
+  border-radius: 28px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: Arial;
+  font-style: bold;
+  margin: 10px;
+  cursor: pointer;
+}
+
+select:hover,
+.myButton:hover {
+  background-color: #eaab67;
+}
+
+select:hover,
+.myButton:active {
+  position: relative;
+  top: 1px;
 }
 
 #checkout-container {
-  max-width: 602px;
+  margin: 10px;
+  max-width: 600px;
+  padding: 25px;
+  border-radius: 2em;
+}
+
+h1 {
+  padding: 50px;
+  background-color: #282a36;
+  color: #f8f8f2;
+}
+
+body {
+  background-color: #282a36;
 }

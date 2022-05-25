@@ -2,13 +2,8 @@ const defaultValue = `requestParams = {
   // see full list of possible params below
   // https://apiref.primer.io/reference/create_client_side_token_client_session_post
   orderId: "order-" + Math.random(),
-
-  // 3-character Currency Code used for all the amount of this session
   currencyCode: "USD",
-
-  // amount: 2222, // if not using line items pass an amount 
-
-  // customer information
+  // amount: 2222, 
   customer: {
     emailAddress: "john@primer.io",
     billingAddress: {
@@ -23,12 +18,7 @@ const defaultValue = `requestParams = {
     },
   },
   order: {
-    // country code -- useful for displaying different payment methods
     countryCode: "US",
-
-    // Line items for this session
-    // If your checkout does not have line items:
-    //  > Pass a single line item with the total amount!
     lineItems: [
       {
         itemId: "shoes-123",
@@ -38,7 +28,18 @@ const defaultValue = `requestParams = {
       },
     ],
   },
-}`;
+}
+
+
+
+
+
+
+
+
+
+
+`;
 
 let built = false;
 
@@ -48,24 +49,43 @@ const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   autoCloseBrackets: true,
   matchBrackets: true,
   foldCode: true,
+  theme: "dracula",
 });
-editor.setSize("90%", "600px");
+editor.setSize("800px", "650px");
 
 editor.setValue(defaultValue);
 
+// grabbing elements from DOM
+
 const submitButton = document.getElementById("submit-button");
+const versionDropDown = document.getElementById("sdk-version-input");
+const apiCSS = document.getElementById("primer-css");
+const apiCDN = document.getElementById("primer-script");
 
 const convertStringToObject = (str) => {
   const code = eval(str);
   return code;
 };
 
+const changeCheckoutContainerBackground = () => {
+  document.getElementById("checkout-container").style.backgroundColor = "white";
+};
+
 submitButton.addEventListener("click", async function (e) {
+  let version = versionDropDown.value;
+  apiCSS.setAttribute(
+    "href",
+    `https://sdk.primer.io/web/${version}/Checkout.css`
+  );
+  apiCDN.setAttribute(
+    "src",
+    `https://sdk.primer.io/web/${version}/Primer.min.css`
+  );
+  console.log(apiCDN, apiCSS);
   e.preventDefault();
   if (built) {
     const checkoutContainer = document.getElementById("checkout-container");
     checkoutContainer.innerHTML = "";
-    // built = !built;
   }
   const stringFromEditor = editor.getValue();
   const obj = convertStringToObject(stringFromEditor);
@@ -77,6 +97,7 @@ submitButton.addEventListener("click", async function (e) {
     },
     body: JSON.stringify(obj),
   }).then((data) => data.json());
+  changeCheckoutContainerBackground();
   buildPrimer(response);
 });
 

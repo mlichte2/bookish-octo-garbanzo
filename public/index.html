@@ -17,9 +17,15 @@
     <script src="dependencies/codemirror-5.65.3/addon/fold/foldcode.js"></script>
     <link
       rel="stylesheet"
+      href="dependencies/codemirror-5.65.3/theme/dracula.css"
+    />
+    <link
+      id="primer-css"
+      rel="stylesheet"
       href="https://sdk.primer.io/web/v2.0.0/Checkout.css"
     />
     <script
+      id="primer-script"
       src="https://sdk.primer.io/web/v2.0.0/Primer.min.js"
       crossorigin="anonymous"
     ></script>
@@ -29,7 +35,19 @@
     <div id="editor-div">
       <h1>Primer Playground</h1>
       <div><textarea id="editor"></textarea></div>
-      <div><button id="submit-button">showUniversalCheckout</button></div>
+      <div>
+        <select
+          name="sdk-version"
+          id="sdk-version-input"
+          style="text-align: center"
+        >
+          <option value="v2.0.0">v2.0.0</option>
+          <option value="v2.1.0" disabled>v2.1.0 (not released)</option>
+        </select>
+        <button class="myButton" id="submit-button">
+          showUniversalCheckout
+        </button>
+      </div>
       <div id="checkout-container"></div>
     </div>
   </body>
