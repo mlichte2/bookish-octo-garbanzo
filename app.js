@@ -39,7 +39,9 @@ app.post("/client-session", async (req, res) => {
       "X-Api-Key": API_KEY,
     },
     body: JSON.stringify(requestBody),
-  }).then((data) => data.json());
+  })
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
   console.log(response);
   return res.send(response);
 });

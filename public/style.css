@@ -36,8 +36,9 @@ select:hover,
   border-radius: 2em;
 }
 
-h1 {
-  padding: 50px;
+h1,
+p {
+  padding: 10px;
   background-color: #282a36;
   color: #f8f8f2;
 }

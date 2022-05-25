@@ -71,7 +71,7 @@ const changeCheckoutContainerBackground = () => {
   document.getElementById("checkout-container").style.backgroundColor = "white";
 };
 
-submitButton.addEventListener("click", async function (e) {
+const chooseVersion = () => {
   let version = versionDropDown.value;
   apiCSS.setAttribute(
     "href",
@@ -81,33 +81,32 @@ submitButton.addEventListener("click", async function (e) {
     "src",
     `https://sdk.primer.io/web/${version}/Primer.min.css`
   );
-  console.log(apiCDN, apiCSS);
-  e.preventDefault();
+  console.log("Built using Primer Universal Checkout sdk version: ", version);
+};
+
+const checkIfPrimerBuilt = () => {
   if (built) {
     const checkoutContainer = document.getElementById("checkout-container");
     checkoutContainer.innerHTML = "";
   }
+};
+
+const getCodeFromEditor = () => {
   const stringFromEditor = editor.getValue();
   const obj = convertStringToObject(stringFromEditor);
-  const response = await fetch("/client-session", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Api-Version": "2021-10-19",
-    },
-    body: JSON.stringify(obj),
-  }).then((data) => data.json());
-  changeCheckoutContainerBackground();
-  buildPrimer(response);
-});
+  return obj;
+};
+
+const options = {
+  submitButton: {
+    useBuiltInButton: false,
+  },
+};
 
 const buildPrimer = async (clientSession) => {
   console.log("Client Session:", clientSession);
-
   const { clientToken } = clientSession;
-
-  console.log(clientToken);
-
+  console.log("Client Token:", clientToken);
   const universalCheckout = await Primer.showUniversalCheckout(clientToken, {
     container: "#checkout-container",
     onCheckoutComplete({ payment }) {
@@ -117,9 +116,36 @@ const buildPrimer = async (clientSession) => {
       if (!handler) {
         return;
       }
-      console.log(error);
+      console.log("Checkout Failed :( ", payment);
       return handler.showErrorMessage(error);
     },
   });
   built = true;
 };
+
+const DisableSubmitButton = () => {
+  submitButton.disabled = true;
+  console.log("ShowUniversalCheckout button disabled for 5 seconds...");
+  setTimeout(function () {
+    submitButton.disabled = false;
+    console.log("ShowUniversalCheckout button enabled");
+  }, 5000);
+};
+
+submitButton.addEventListener("click", async function (e) {
+  e.preventDefault();
+  DisableSubmitButton();
+  chooseVersion();
+  checkIfPrimerBuilt();
+  const code = getCodeFromEditor();
+  const response = await fetch("/client-session", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Api-Version": "2021-10-19",
+    },
+    body: JSON.stringify(code),
+  }).then((data) => data.json());
+  changeCheckoutContainerBackground();
+  buildPrimer(response);
+});
