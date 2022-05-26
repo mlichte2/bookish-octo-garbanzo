@@ -110,13 +110,21 @@ const buildPrimer = async (clientSession) => {
   const universalCheckout = await Primer.showUniversalCheckout(clientToken, {
     container: "#checkout-container",
     onCheckoutComplete({ payment }) {
-      console.log("Checkout Complete!", payment);
+      console.log(
+        "Checkout Complete!",
+        payment,
+        `\n view at https://sandbox-dashboard.primer.io/payments/${payment.id}`
+      );
     },
     onCheckoutFail(error, { payment }, handler) {
       if (!handler) {
         return;
       }
-      console.log("Checkout Failed :( ", payment);
+      console.log(
+        "Checkout Failed :( ",
+        payment,
+        `\n view at https://sandbox-dashboard.primer.io/payments/${payment.id}`
+      );
       return handler.showErrorMessage(error);
     },
   });
