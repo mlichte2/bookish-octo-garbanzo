@@ -1,7 +1,7 @@
 const defaultValue = `requestParams = {
   // see full list of possible params below
   // https://apiref.primer.io/reference/create_client_side_token_client_session_post
-  orderId: "order-" + Math.random(),
+  orderId: "order-" + Math.random().toString(36).slice(2),
   currencyCode: "USD",
   // amount: 2222, 
   customer: {
@@ -150,7 +150,6 @@ submitButton.addEventListener("click", async function (e) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Api-Version": "2021-10-19",
     },
     body: JSON.stringify(code),
   }).then((data) => data.json());
