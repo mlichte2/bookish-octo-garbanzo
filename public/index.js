@@ -71,6 +71,9 @@ const changeCheckoutContainerBackground = () => {
   document.getElementById("checkout-container").style.backgroundColor = "white";
 };
 
+// function to update src of css and js files in the DOM
+// currently not working -- I get a Primer not found error
+
 const chooseVersion = () => {
   let version = versionDropDown.value;
   apiCSS.setAttribute(
