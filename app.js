@@ -35,13 +35,69 @@ app.post("/client-session", async (req, res) => {
     method: "post",
     headers: {
       "Content-Type": "application/json",
-      "X-Api-Version": "2021-09-27",
+      "X-Api-Version": "2.1",
       "X-Api-Key": API_KEY,
     },
     body: JSON.stringify(requestBody),
   })
     .then((data) => data.json())
     .catch((err) => console.log(err));
+  console.log(response);
+  return res.send(response);
+});
+
+app.get("/transaction", async (req, res) => {
+  console.log(req.body);
+  const paymentId = req.paymentId;
+  const url = `${PRIMER_API_URL}/payments`;
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Api-Version": "2.1",
+      "X-Api-Key": API_KEY,
+    },
+  })
+    .then((data) => data.json())
+    .catch((err) => console.log(err));
+  console.log(response);
+  return res.send(response);
+});
+
+app.patch("/client-session", async (req, res) => {
+  {
+    const url = `${PRIMER_API_URL}/client-session`;
+    const requestBody = req.body;
+    console.log(requestBody);
+    const response = await fetch(url, {
+      method: "patch",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Api-Version": "2.1",
+        "X-Api-Key": API_KEY,
+        "Legacy-Workflows": false,
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((data) => data.json())
+      .catch((err) => console.log(err));
+    console.log(response);
+    return res.send(response);
+  }
+});
+
+app.get("/search-payment", async (req, res) => {
+  const paymentId = req.query.paymentId;
+  const url = `${PRIMER_API_URL}/payments/${paymentId}`;
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-Api-Version": "2.2",
+      "X-Api-Key": API_KEY,
+    },
+  })
+    .then((data) => data.json())
+    .catch((err) => err.json());
   console.log(response);
   return res.send(response);
 });

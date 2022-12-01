@@ -23,11 +23,11 @@
     <link
       id="primer-css"
       rel="stylesheet"
-      href="https://sdk.primer.io/web/v2.2.1/Checkout.css"
+      href="https://sdk.primer.io/web/v2-latest/Checkout.css"
     />
     <script
       id="primer-script"
-      src="https://sdk.primer.io/web/v2.2.1/Primer.min.js"
+      src="https://sdk.primer.io/web/v2-latest/Primer.min.js"
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="style.css" />
@@ -48,11 +48,18 @@
           <option value="v2.1.0" disabled>v2.1.0</option>
           <option value="v2.1.1" disabled>v2.1.1</option>
           <option value="v2.2.0" disabled>v2.2.0</option>
-          <option value="v2.2.1">v2.2.1</option>
+          <option value="v2.2.1" disabled>v2.2.1</option>
+          <option value="v2.2.2" disabled>v2.2.2</option>
+          <option value="v2.3.0" disabled>v2.3.0</option>
+          <option value="v2.3.1" disabled>v2.3.1</option>
+          <option value="v2.4.0" disabled>v2.4.0</option>
+          <option value="v2-latest">v2-latest</option>
         </select>
         <button class="myButton" id="submit-button">
           showUniversalCheckout
         </button>
+        <button class="myButton" id="patch-button">patch</button>
+        <button class="myButton" id="pay-button">pay</button>
       </div>
       <div id="checkout-container"></div>
     </div>
